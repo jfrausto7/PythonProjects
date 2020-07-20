@@ -155,7 +155,6 @@ cur_weather_details = soup.find(id = "current_conditions_detail")
 cur_weather_conditions = cur_weather_conditions.text
 cur_weather_details = cur_weather_details.text
 
-# Final Output
 # Return scraped information
 print('The Current Weather Conditions in '+ resultCity +  ", " + resultState + " is:" + cur_weather_conditions)
 print('More details: ' + cur_weather_details )
