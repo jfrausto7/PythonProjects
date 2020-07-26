@@ -1,10 +1,9 @@
 #imports
 from random import randint
+import random
 import tweepy
 
-# list to hold tweets in
-tweets = []
-
+"""This method is the entire purpose of this """
 def getAndReturnRandom():
     # Authenticate to Twitter
     auth = tweepy.OAuthHandler("jL0Ces67FiDz6JIptpWPQbBzJ",
@@ -34,13 +33,37 @@ def getAndReturnRandom():
             x = randint(0, len(tweets) - 1)
             tweetToTweet = tweets[x]
 
+    # set equal to text
+    tweetToTweet = tweetToTweet.text
+
+    # remove all punctuation from tweet
+    tweetToTweet = tweetToTweet.replace(',', '')
+    tweetToTweet = tweetToTweet.replace('.', '')
+    tweetToTweet = tweetToTweet.replace('…', '')
+    tweetToTweet = tweetToTweet.replace('!', '')
+
+    listOfText = tweetToTweet.split()
+
+    # iterate through strings to remove link
+    for s in listOfText:
+        if len(s) > 4:
+            if(s[0:4] == "http"):
+                listOfText.remove(s)
 
 
+    # shuffle words around add a capital and period
+    random.shuffle(listOfText)
+    if listOfText[0]:
+        first = listOfText[0]
+        first.capitalize()
+
+    print(" ".join(listOfText) + ".")
 
     #status update with random tweet
-    api.update_status(tweetToTweet.text)
+    # api.update_status(" ".join(listOfText) + ".")
 
-    print("Finished execution of tweet.")
+
+    print("Finished execution of TwitterBot.")
 
 if __name__ == "__main__":
     getAndReturnRandom()
