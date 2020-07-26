@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 #imports
 from random import randint
 import random
@@ -27,11 +29,12 @@ def getAndReturnRandom():
 
     #setup of tweet to tweet
     tweetToTweet = tweets[x]
-    if (tweetToTweet.retweeted) or ('RT @' in tweetToTweet.text):
-        while((tweetToTweet.retweeted) or ('RT @' in tweetToTweet.text)):
+    if (tweetToTweet.retweeted) or ('RT @' in tweetToTweet.text) or len(tweetToTweet.text.split()) > 21:
+        while((tweetToTweet.retweeted) or ('RT @' in tweetToTweet.text) or len(tweetToTweet.text.split()) > 21):
             # get new random number to select from tweets
             x = randint(0, len(tweets) - 1)
             tweetToTweet = tweets[x]
+
 
     # set equal to text
     tweetToTweet = tweetToTweet.text
@@ -41,6 +44,8 @@ def getAndReturnRandom():
     tweetToTweet = tweetToTweet.replace('.', '')
     tweetToTweet = tweetToTweet.replace('…', '')
     tweetToTweet = tweetToTweet.replace('!', '')
+    tweetToTweet = tweetToTweet.replace('"', '')
+    tweetToTweet = tweetToTweet.replace("&amp", '&')
 
     listOfText = tweetToTweet.split()
 
@@ -50,17 +55,20 @@ def getAndReturnRandom():
             if(s[0:4] == "http"):
                 listOfText.remove(s)
 
+    # iterate through strings to make all lowercase
+    for i in range(len(listOfText)):
+        listOfText[i] = listOfText[i].lower()
 
     # shuffle words around add a capital and period
     random.shuffle(listOfText)
-    if listOfText[0]:
-        first = listOfText[0]
-        first.capitalize()
+    listOfText[0] = listOfText[0].capitalize()
 
-    print(" ".join(listOfText) + ".")
+    string = " ".join(listOfText) + "."
 
     #status update with random tweet
-    # api.update_status(" ".join(listOfText) + ".")
+    api.update_status(string)
+
+    print("Tweeted: " + string)
 
 
     print("Finished execution of TwitterBot.")
