@@ -61,7 +61,8 @@ def getAndReturnRandom():
 
     # shuffle words around add a capital and period
     random.shuffle(listOfText)
-    listOfText[0] = listOfText[0].capitalize()
+    if listOfText[0]:
+        listOfText[0] = listOfText[0].capitalize()
 
     string = " ".join(listOfText) + "."
 
