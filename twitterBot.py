@@ -21,8 +21,8 @@ def getAndReturnRandom():
     except:
         print("Error during authentication")
 
-    # get 20 recent tweets and store in tweets
-    tweets = api.home_timeline();
+    # get 200 recent tweets and store in tweets
+    tweets = api.home_timeline(count=200);
 
     # get random number to select from tweets
     x = randint(0, len(tweets)-1)
