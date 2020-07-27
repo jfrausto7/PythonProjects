@@ -22,7 +22,7 @@ def getAndReturnRandom():
         print("Error during authentication")
 
     # get 200 recent tweets and store in tweets
-    tweets = api.home_timeline(count=200);
+    tweets = api.home_timeline(count=200)
 
     # get random number to select from tweets
     x = randint(0, len(tweets)-1)
@@ -44,7 +44,8 @@ def getAndReturnRandom():
     tweetToTweet = tweetToTweet.replace('.', '')
     tweetToTweet = tweetToTweet.replace('…', '')
     tweetToTweet = tweetToTweet.replace('!', '')
-    tweetToTweet = tweetToTweet.replace('"', '')
+    tweetToTweet = tweetToTweet.replace('?', '')
+    tweetToTweet = tweetToTweet.replace('“', '')
     tweetToTweet = tweetToTweet.replace("&amp", '&')
 
     listOfText = tweetToTweet.split()
@@ -69,10 +70,11 @@ def getAndReturnRandom():
     #status update with random tweet
     api.update_status(string)
 
-    print("Tweeted: " + string)
-
-
-    print("Finished execution of TwitterBot.")
+    try:
+        print("Tweeted: " + string)
+        print("Finished execution of TwitterBot.")
+    except:
+        pass
 
 if __name__ == "__main__":
     getAndReturnRandom()
