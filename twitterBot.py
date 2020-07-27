@@ -46,6 +46,7 @@ def getAndReturnRandom():
     tweetToTweet = tweetToTweet.replace('!', '')
     tweetToTweet = tweetToTweet.replace('?', '')
     tweetToTweet = tweetToTweet.replace('“', '')
+    tweetToTweet = tweetToTweet.replace('”', '')
     tweetToTweet = tweetToTweet.replace("&amp", '&')
 
     listOfText = tweetToTweet.split()
